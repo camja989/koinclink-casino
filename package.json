@@ -48,4 +48,8 @@
   ],
   "author": "KoinClink Team",
   "license": "MIT"
+  ,
+  "engines": {
+    "node": "^20.10.0 || ^22.0.0"
+  }
 }
