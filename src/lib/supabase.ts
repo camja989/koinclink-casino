@@ -78,19 +78,20 @@ export const db = {
       return { data, error };
     },
 
-    create: async (profile: any) => {
+    create: async (profile: import('@/types/database').Database['public']['Tables']['profiles']['Insert']) => {
       const { data, error } = await supabase
         .from('profiles')
-        .insert(profile)
+        .insert([profile] as any)
         .select()
         .single();
       return { data, error };
     },
 
-    update: async (userId: string, updates: any) => {
+    update: async (userId: string, updates: import('@/types/database').Database['public']['Tables']['profiles']['Update']) => {
+      // @ts-ignore
       const { data, error } = await supabase
         .from('profiles')
-        .update(updates)
+        .update(updates as any)
         .eq('id', userId)
         .select()
         .single();
@@ -101,7 +102,7 @@ export const db = {
       const { data, error } = await supabase.rpc('update_user_coins', {
         user_id: userId,
         coin_change: amount,
-      });
+      } as any);
       return { data, error };
     },
   },
@@ -154,11 +155,7 @@ export const db = {
     unlock: async (userId: string, achievementId: string) => {
       const { data, error } = await supabase
         .from('user_achievements')
-        .insert({
-          user_id: userId,
-          achievement_id: achievementId,
-          unlocked_at: new Date().toISOString(),
-        })
+        .insert([{ user_id: userId, achievement_id: achievementId, unlocked_at: new Date().toISOString() }] as any)
         .select()
         .single();
       return { data, error };
@@ -182,7 +179,7 @@ export const db = {
       const { data, error } = await supabase.rpc('get_player_rank', {
         player_id: userId,
         rank_metric: metric,
-      });
+      } as any);
       return { data, error };
     },
   },

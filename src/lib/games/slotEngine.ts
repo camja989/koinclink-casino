@@ -89,14 +89,20 @@ export class SlotEngine {
 
   // Calculate wins from visible symbols
   private calculateWins(visibleSymbols: SlotSymbol[][], betAmount: number): GameResult {
-    const winLines: WinLineResult[] = [];
+  const winLines: import('@/types/game').WinLine[] = [];
     let totalWin = 0;
 
     // Check each payline
     this.config.paylines.forEach(payline => {
       const lineResult = this.checkPayline(visibleSymbols, payline, betAmount);
       if (lineResult.win > 0) {
-        winLines.push(lineResult);
+        // Map WinLineResult to WinLine
+        winLines.push({
+          line: lineResult.paylineId,
+          symbols: [lineResult.winSymbol],
+          payout: lineResult.basePayout,
+          positions: Array.isArray(lineResult.positions) ? lineResult.positions.flat() : [],
+        });
         totalWin += lineResult.win;
       }
     });

@@ -40,7 +40,7 @@ export class GameValidator {
 
   // Validate slot game result
   validateSlotResult(result: number[][], paytable: any, betAmount: number): GameResult {
-    const winLines = this.calculateWinLines(result, paytable);
+  const winLines: import('@/types/game').WinLine[] = this.calculateWinLines(result, paytable);
     const totalWin = winLines.reduce((sum, line) => sum + line.payout, 0) * betAmount;
     
     return {
@@ -54,7 +54,7 @@ export class GameValidator {
 
   // Calculate winning lines for slot machine
   private calculateWinLines(result: number[][], paytable: any) {
-    const winLines = [];
+  const winLines: import('@/types/game').WinLine[] = [];
     const paylines = [
       [0, 0, 0], // Top row
       [1, 1, 1], // Middle row  

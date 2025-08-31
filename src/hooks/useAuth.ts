@@ -154,7 +154,10 @@ export function useAuth() {
 
       // Initialize game store with user data
       if (profile) {
-        initializePlayer(profile.username);
+        const dbProfile = profile as import('@/types/database').Database['public']['Tables']['profiles']['Row'];
+        if (typeof dbProfile.username === 'string') {
+          initializePlayer(dbProfile.username);
+        }
       }
 
     } catch (error) {
