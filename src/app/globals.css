@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: system-ui, sans-serif;
+  }
+  
+  body {
+    @apply text-white;
+  }
+}
+
+@layer components {
+  .casino-card {
+    @apply bg-gradient-to-br from-gray-800 to-gray-900 border border-casino-gold/30 rounded-lg shadow-lg backdrop-blur-sm;
+  }
+  
+  .casino-button {
+    @apply bg-gold-gradient text-black font-bold py-2 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 border border-casino-gold;
+  }
+  
+  .casino-button-secondary {
+    @apply bg-transparent border-2 border-casino-gold text-casino-gold hover:bg-casino-gold hover:text-black font-bold py-2 px-6 rounded-lg transition-all duration-200;
+  }
+  
+  .neon-text {
+    @apply text-transparent bg-clip-text bg-neon-gradient animate-glow;
+  }
+  
+  .game-card {
+    @apply casino-card p-6 hover:border-casino-gold/60 transition-all duration-300 cursor-pointer transform hover:scale-105;
+  }
+  
+  .coin-display {
+    @apply bg-casino-gold text-black px-4 py-2 rounded-full font-digital font-bold text-lg shadow-lg;
+  }
+  
+  .slot-reel {
+    @apply bg-gray-800 border-2 border-casino-gold rounded-lg p-4 text-center text-2xl font-bold;
+  }
+  
+  .card-suit-red {
+    @apply text-casino-red;
+  }
+  
+  .card-suit-black {
+    @apply text-gray-900;
+  }
+  
+  .roulette-number-red {
+    @apply bg-casino-red text-white;
+  }
+  
+  .roulette-number-black {
+    @apply bg-gray-900 text-white;
+  }
+  
+  .roulette-number-green {
+    @apply bg-casino-darkGreen text-white;
+  }
+}
+
+@layer utilities {
+  .text-shadow-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+  
+  .text-shadow-gold {
+    text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700;
+  }
+  
+  .glow-border {
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  }
+  
+  .neon-glow {
+    box-shadow: 0 0 20px currentColor, inset 0 0 20px currentColor;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFD700;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFA500;
+}
+
+/* Animation for spinning reels */
+@keyframes spin-reel {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-100px); }
+  100% { transform: translateY(0); }
+}
+
+.spinning {
+  animation: spin-reel 0.5s ease-in-out;
+}
+
+/* Poker chip animation */
+@keyframes chip-flip {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+.chip-flip {
+  animation: chip-flip 0.6s ease-in-out;
+}
+
+/* Card dealing animation */
+@keyframes deal-card {
+  0% { 
+    transform: translateX(-100px) rotate(-45deg);
+    opacity: 0;
+  }
+  100% { 
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.deal-animation {
+  animation: deal-card 0.5s ease-out;
+}
+
+/* Jackpot celebration animation */
+@keyframes jackpot-celebration {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(3deg); }
+  75% { transform: scale(1.1) rotate(-3deg); }
+}
+
+.jackpot-animate {
+  animation: jackpot-celebration 0.5s ease-in-out infinite;
+}
